@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+    <definition name="index" template="/WEB-INF/pages/index.jsp">
+        <put-attribute name="header" value="/WEB-INF/pages/common/header.jsp"/>
+        <put-attribute name="footer" value="/WEB-INF/pages/common/footer.jsp"/>
+    </definition>
+
+    <definition name="signin" template="/WEB-INF/pages/signin.jsp">
+        <put-attribute name="header" value="/WEB-INF/pages/common/header.jsp"/>
+        <put-attribute name="footer" value="/WEB-INF/pages/common/footer.jsp"/>
+    </definition>
+
+    <definition name="registration" template="/WEB-INF/pages/registration.jsp">
+        <put-attribute name="header" value="/WEB-INF/pages/common/header.jsp"/>
+        <put-attribute name="footer" value="/WEB-INF/pages/common/footer.jsp"/>
+    </definition>
+
+</tiles-definitions>
+
