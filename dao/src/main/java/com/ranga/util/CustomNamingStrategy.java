@@ -7,7 +7,7 @@ import org.hibernate.cfg.DefaultNamingStrategy;
 public class CustomNamingStrategy extends DefaultNamingStrategy {
 
     public String classToTableName(String className) {
-        return "T_" + super.classToTableName(className);
+        return "t_" + super.classToTableName(className);
     }
 
     public String propertyToColumnName(String propName) {
