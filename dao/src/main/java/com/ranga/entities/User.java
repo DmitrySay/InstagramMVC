@@ -8,6 +8,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "F_USER_ID")
     private int id;
 
     @Column

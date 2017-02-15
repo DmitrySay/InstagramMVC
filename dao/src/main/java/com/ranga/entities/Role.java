@@ -8,14 +8,13 @@ public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    //@Column(name = "F_ROLE_ID")
+    @Column(name = "F_ROLE_ID")
     private int id;
 
     @Column(name="F_NAME")
     private String name;
 
     @ManyToMany(mappedBy = "roles")
-    @Column(name="F_USERS")
     private Set<User> users;
 
     public Role() {
