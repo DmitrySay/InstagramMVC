@@ -15,4 +15,5 @@ public class RoleDao extends BaseDao<Role> implements IRoleDao<Role> {
         super(sessionFactory);
     }
 
+
 }

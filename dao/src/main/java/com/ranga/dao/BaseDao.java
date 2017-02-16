@@ -16,6 +16,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 import java.io.Serializable;
 
 @Repository()
@@ -49,7 +50,7 @@ public class BaseDao<T> implements Dao<T> {
 
     @Override
     public T get(Class<T> clazz, Serializable id) {
-        log.info("Get:" + id);
+        log.info("Get:" + clazz + " id = " + id);
         return (T) getSession().load(clazz, id);
     }
 
@@ -65,5 +66,6 @@ public class BaseDao<T> implements Dao<T> {
         getSession().refresh(t);
     }
 
-
+    public BaseDao() {
+    }
 }

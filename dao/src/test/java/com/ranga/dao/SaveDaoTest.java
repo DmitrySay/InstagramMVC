@@ -1,9 +1,6 @@
-package com.ranga.service;
+package com.ranga.dao;
 
 
-import com.ranga.dao.IRoleDao;
-import com.ranga.dao.IUserDao;
-import com.ranga.entities.Image;
 import com.ranga.entities.Role;
 import com.ranga.entities.User;
 import org.junit.Test;
@@ -21,10 +18,8 @@ import java.util.Set;
 @RunWith(SpringJUnit4ClassRunner.class)
 @TransactionConfiguration(defaultRollback = false)
 @Transactional
-public class ImageServiceTest {
+public class SaveDaoTest {
 
-    @Autowired
-    private IImageService imageService;
 
     @Autowired
     private IRoleDao roleDao;
@@ -33,28 +28,45 @@ public class ImageServiceTest {
     private IUserDao userDao;
 
     @Test
-    public void addImage() {
-
-        Image image = new Image();
-        image.setComment("hello");
-        image.setFilename("C://");
-        imageService.add(image);
-
-        //TODO
-    }
-/*
-    @Test
-    public void save() {
+    public void createRoleAndUser() {
         User user = new User();
-
         user.setPassword("123");
         user.setUsername("user");
-        Set<Role> roles = new HashSet<>();
-        Role role = (Role) roleDao.get(Role.class, 1);
-        roles.add(role);
-        user.setRoles(roles);
         userDao.add(user);
 
+
+
+
+        Role role = new Role();
+        role.setId(1);
+        role.setName("ROLE_USER");
+        roleDao.add(role);
     }
-*/
+
+
+
+
+    @Test
+    public void save() {
+
+        Set<Role> roles = new HashSet<>();
+        Role role =(Role) roleDao.get(Role.class,1);
+       // System.out.println("role = "+ role.toString());
+
+
+         System.out.println("======2");
+         roles.add(role);
+
+        User user = new User();
+        user.setUsername("name");
+        user.setPassword("pass");
+        user.setRoles(roles);
+
+        System.out.println("======3");
+        userDao.add(user);
+        System.out.println("======4");
+
+
+    }
+
 }

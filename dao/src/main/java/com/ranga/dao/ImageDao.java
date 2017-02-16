@@ -49,5 +49,6 @@ public class ImageDao extends BaseDao<Image> implements IImageDao<Image> {
                 .list();
     }
 
-
+    public ImageDao() {
+    }
 }

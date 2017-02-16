@@ -29,9 +29,7 @@
           class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"></property>
 
-        <property name="namingStrategy">
-            <bean class="com.ranga.util.CustomNamingStrategy" />
-        </property>
+
 
         <property name="hibernateProperties">
             <props>

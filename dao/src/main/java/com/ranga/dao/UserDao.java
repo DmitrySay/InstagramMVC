@@ -9,10 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository()
-public class UserDao extends BaseDao<User> implements IUserDao<User>{
+public class UserDao extends BaseDao<User> implements IUserDao<User> {
 
-
-   @Autowired
+    @Autowired
     public UserDao(SessionFactory sessionFactory) {
         super(sessionFactory);
     }

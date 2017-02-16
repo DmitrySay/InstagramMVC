@@ -1,10 +1,15 @@
 package com.ranga.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class User {
+@Table(name = "users")
+public class User implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,12 +28,15 @@ public class User {
     @ManyToMany
     @JoinTable(name = "t_user_roles", joinColumns = @JoinColumn(name = "F_USER_ID"),
             inverseJoinColumns = @JoinColumn(name = "F_ROLE_ID"))
-    private Set<Role> roles;
+    private Set<Role> roles = new HashSet<>();
 
     public User() {
 
     }
 
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
     public int getId() {
         return id;
@@ -69,7 +77,6 @@ public class User {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
-
 
     @Override
     public String toString() {
