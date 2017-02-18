@@ -30,13 +30,10 @@ public class User implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "F_ROLE_ID"))
     private Set<Role> roles = new HashSet<>();
 
+
     public User() {
-
     }
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
 
     public int getId() {
         return id;
@@ -85,7 +82,6 @@ public class User implements Serializable {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", confirmPassword='" + confirmPassword + '\'' +
-                ", roles=" + roles +
                 '}';
     }
 }

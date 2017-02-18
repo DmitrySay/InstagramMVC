@@ -17,12 +17,15 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.io.Serializable;
 
 @Repository()
+@Transactional
 public class BaseDao<T> implements Dao<T> {
 
     protected static Logger log = Logger.getLogger(BaseDao.class);
+
     private SessionFactory sessionFactory;
 
 
@@ -66,6 +69,4 @@ public class BaseDao<T> implements Dao<T> {
         getSession().refresh(t);
     }
 
-    public BaseDao() {
-    }
 }

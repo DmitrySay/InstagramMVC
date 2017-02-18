@@ -2,6 +2,7 @@ package com.ranga.dao;
 
 import com.ranga.entities.Image;
 import org.hibernate.Criteria;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
@@ -21,7 +22,8 @@ public class ImageDao extends BaseDao<Image> implements IImageDao<Image> {
 
     @Override
     public List<Image> getImages() {
-        log.info("Get images:" );
+
+        log.info("Get images:");
         Criteria query = getSession().createCriteria(Image.class);
         return query.list();
     }
@@ -29,7 +31,7 @@ public class ImageDao extends BaseDao<Image> implements IImageDao<Image> {
     @Override
     public Long count() {
 
-        log.info("count images:" );
+        log.info("Count images:");
         return (Long) getSession()
                 .createCriteria(Image.class)
                 .setProjection(Projections.rowCount())
@@ -40,7 +42,8 @@ public class ImageDao extends BaseDao<Image> implements IImageDao<Image> {
     @Override
     @SuppressWarnings("unchecked")
     public List<Image> list(Integer offset, Integer maxResults) {
-        log.info("List images: offset = "+offset+"maxResults = "+maxResults);
+
+        log.info("List images: offset = " + offset + " maxResults = " + maxResults);
         return getSession()
                 .createCriteria(Image.class)
                 .setFirstResult(offset != null ? offset : 0)
@@ -49,6 +52,13 @@ public class ImageDao extends BaseDao<Image> implements IImageDao<Image> {
                 .list();
     }
 
-    public ImageDao() {
+    @Override
+    public void deleteImage(int id) {
+
+        Session session = getSession();
+        Image image = (Image) session.get(Image.class, id);
+        session.delete(image);
+        log.info("Delete image: " + id);
     }
+
 }

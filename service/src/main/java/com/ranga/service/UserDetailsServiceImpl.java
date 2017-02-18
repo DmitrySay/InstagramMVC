@@ -3,6 +3,7 @@ package com.ranga.service;
 import com.ranga.entities.Role;
 import com.ranga.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.HashSet;
 import java.util.Set;
 
-@Service()
+@Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired

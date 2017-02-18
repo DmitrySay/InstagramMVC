@@ -1,5 +1,6 @@
 package com.ranga.service;
 
+import com.ranga.dao.Dao;
 import com.ranga.dao.IRoleDao;
 import com.ranga.dao.IUserDao;
 import com.ranga.entities.Role;
@@ -16,7 +17,6 @@ import java.util.Set;
 @Transactional
 public class UserService extends BaseService<User> implements IUserService<User> {
 
-
     @Autowired
     private IUserDao userDao;
 
@@ -26,10 +26,17 @@ public class UserService extends BaseService<User> implements IUserService<User>
     @Autowired(required = false)
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    @Autowired
+    public UserService(Dao<User> baseDao) {
+        super(baseDao);
+    }
+
+    public UserService() {
+    }
 
     @Override
     public User findByUsername(String username) {
-        return userDao.findByUsername(username);
+        return (User) userDao.findByUsername(username);
     }
 
     @Override
