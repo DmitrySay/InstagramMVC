@@ -6,9 +6,10 @@ import com.ranga.service.IImageService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+@Deprecated
 public class Main {
 
-/*
+
     public static void main(String[] args) {
 
        ApplicationContext context = new ClassPathXmlApplicationContext("classpath*:beans-service.xml", "classpath*:applicationConfig.xml");
@@ -27,6 +28,6 @@ public class Main {
         ((ClassPathXmlApplicationContext) context).close();
 
     }
-*/
+
 }
 
