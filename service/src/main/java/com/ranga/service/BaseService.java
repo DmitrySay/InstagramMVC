@@ -28,6 +28,7 @@ public class BaseService<T> implements IService<T> {
     @Override
     public void update(T t) {
         baseDao.update(t);
+
     }
 
     @Override

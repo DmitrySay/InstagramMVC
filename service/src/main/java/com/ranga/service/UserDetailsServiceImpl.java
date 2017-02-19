@@ -2,8 +2,8 @@ package com.ranga.service;
 
 import com.ranga.entities.Role;
 import com.ranga.entities.User;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,6 +18,8 @@ import java.util.Set;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
+    private static final Logger log = Logger.getLogger(UserDetailsServiceImpl.class);
+
     @Autowired
     private IUserService userService;
 
@@ -26,6 +28,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         User user = (User) userService.findByUsername(username);
+
+        if (user == null) {
+
+            log.info("UserDetails loadUserByUsername(String username) : User not found");
+            throw new UsernameNotFoundException("User not found");
+
+        }
+
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
 
         for (Role role : user.getRoles()) {
