@@ -37,7 +37,7 @@
         <property name="dataSource" ref="dataSource"></property>
 
         <property name="namingStrategy">
-            <bean class="com.ranga.util.CustomNamingStrategy" />
+            <bean class="com.ranga.util.CustomNamingStrategy"/>
         </property>
 
         <property name="hibernateProperties">
@@ -60,6 +60,11 @@
     </bean>
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
+
+
+    <bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+        <constructor-arg name="strength" value="11"/>
+    </bean>
 
 
 </beans>

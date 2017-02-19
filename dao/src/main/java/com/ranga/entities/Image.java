@@ -56,4 +56,24 @@ public class Image implements Serializable {
                 ", filename='" + filename + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Image image = (Image) o;
+
+        if (id != image.id) return false;
+        if (comment != null ? !comment.equals(image.comment) : image.comment != null) return false;
+        return filename != null ? filename.equals(image.filename) : image.filename == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (comment != null ? comment.hashCode() : 0);
+        result = 31 * result + (filename != null ? filename.hashCode() : 0);
+        return result;
+    }
 }

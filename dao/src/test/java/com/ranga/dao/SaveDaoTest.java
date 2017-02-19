@@ -3,6 +3,7 @@ package com.ranga.dao;
 
 import com.ranga.entities.Role;
 import com.ranga.entities.User;
+import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import java.util.Set;
 
 @ContextConfiguration("/testConfig.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
-@TransactionConfiguration(defaultRollback = false)
+@TransactionConfiguration(defaultRollback = true)
 @Transactional
 public class SaveDaoTest {
 
@@ -28,34 +29,19 @@ public class SaveDaoTest {
     private IUserDao userDao;
 
     @Test
-    public void createRoleAndUser() {
-        User user = new User();
-        user.setPassword("123");
-        user.setUsername("user");
-        userDao.add(user);
+    public void findByUserNameTest() {
 
-        Role role = new Role();
-        role.setId(1);
-        role.setName("ROLE_USER");
-        roleDao.add(role);
-    }
-
-    @Test
-    public void findByUserName() {
-
-        String username = "user";
-
+        String username = "admin";
         User user = (User) userDao.findByUsername(username);
-        System.out.println("******* " + user.toString());
+        assertEquals("Username not equals","admin", user.getUsername());
     }
 
 
     @Test
-    public void save() {
+    public void saveTest() {
 
         Set<Role> roles = new HashSet<>();
         Role role = (Role) roleDao.get(Role.class, 1);
-
         roles.add(role);
 
         User user = new User();

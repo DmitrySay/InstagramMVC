@@ -18,7 +18,7 @@ import static org.junit.Assert.assertNotNull;
 
 @ContextConfiguration("classpath:/testConfig.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
-@TransactionConfiguration(defaultRollback = false)
+@TransactionConfiguration(defaultRollback = true)
 @Transactional
 public class ImageDaoTest {
 
@@ -27,7 +27,7 @@ public class ImageDaoTest {
 
 
     @Test
-    public void addImage() {
+    public void addImageTest() {
 
         Image image = new Image();
         image.setComment("привет");
@@ -42,11 +42,7 @@ public class ImageDaoTest {
     }
 
     @Test
-    public void deleteImage() {
-        Image image = new Image();
-        image.setComment("привет");
-        image.setFilename("C://");
-        imageDao.add(image);
+    public void deleteImageTest() {
 
         List<Image> list = imageDao.getImages();
         Assert.assertNotNull(list);
@@ -54,7 +50,6 @@ public class ImageDaoTest {
         int oldSize = list.size();
         Image im = list.get(list.size() - 1);
         imageDao.delete(im);
-
 
         List<Image> newlist = imageDao.getImages();
         Assert.assertNotNull(newlist);
@@ -64,8 +59,8 @@ public class ImageDaoTest {
     }
 
     @Test
-    @Ignore
-    public void getImages() {
+    public void getImagesTest() {
+
         List<Image> list = imageDao.getImages();
         Assert.assertNotNull(list);
         Assert.assertTrue(list.size() > 0);
@@ -73,7 +68,7 @@ public class ImageDaoTest {
     }
 
     @Test
-    public void updateImage() {
+    public void updateImageTest() {
 
         Image im = new Image();
         im.setComment("привет");
