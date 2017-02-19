@@ -4,13 +4,14 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table
+@Table(name = "images")
 public class Image implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "F_IMAGE_ID")
     private int id;
 
     @Column(columnDefinition = "text")
@@ -20,7 +21,6 @@ public class Image implements Serializable {
     private String filename;
 
     public Image() {
-
     }
 
     public int getId() {

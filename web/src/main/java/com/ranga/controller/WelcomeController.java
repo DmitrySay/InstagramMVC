@@ -4,6 +4,7 @@ import com.ranga.entities.Image;
 import com.ranga.entities.User;
 import com.ranga.service.IImageService;
 import com.ranga.service.IUserService;
+import com.ranga.service.SecurityService;
 import com.ranga.service.UserValidator;
 import org.apache.commons.io.FileUtils;
 import org.jboss.logging.Logger;
@@ -38,6 +39,9 @@ public class WelcomeController {
 
     @Autowired
     private UserValidator userValidator;
+
+    @Autowired
+    private SecurityService securityService;
 
 
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
@@ -120,7 +124,7 @@ public class WelcomeController {
 
         userService.add(userForm);
 
-        //  securityService.autoLogin(userForm.getUsername(), userForm.getConfirmPassword());
+        securityService.autoLogin(userForm.getUsername(), userForm.getConfirmPassword());
 
         return "redirect:/index";
     }
@@ -170,7 +174,9 @@ public class WelcomeController {
     public String deleteImage(@PathVariable("imageId") Integer imageId) {
 
         if (imageId != null) {
-            imageService.delete(imageId);
+            imageService.deleteImage(imageId);
+
+            //TODO удалить сами фото , а не только ссылки на них из БД
         }
         return "redirect:/";
 

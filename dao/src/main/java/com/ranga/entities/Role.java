@@ -25,9 +25,6 @@ public class Role implements Serializable {
     public Role() {
     }
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
 
     public int getId() {
         return id;
@@ -58,7 +55,6 @@ public class Role implements Serializable {
         return "Role{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", users=" + users +
                 '}';
     }
 }

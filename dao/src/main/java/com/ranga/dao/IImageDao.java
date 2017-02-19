@@ -10,4 +10,6 @@ public interface IImageDao<T> extends Dao<T> {
     Long count();
 
     List<T> list(Integer offset, Integer maxResults);
+
+    void deleteImage(int id);
 }

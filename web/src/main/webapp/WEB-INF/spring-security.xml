@@ -12,7 +12,6 @@
         <intercept-url pattern="/pages/**" access="ROLE_USER"/>
 
 
-
         <form-login
                 login-page="/signin"
                 default-target-url="/index"
@@ -29,6 +28,7 @@
 
 
     <authentication-manager alias="authenticationManager">
+
         <authentication-provider user-service-ref="userDetailsServiceImpl">
             <password-encoder ref="encoder"></password-encoder>
         </authentication-provider>
@@ -43,24 +43,17 @@
     </beans:bean>
 
 
-<!--
-    <authentication-manager>
-        <authentication-provider>
-            <user-service>
-                <user name="user" password="123" authorities="ROLE_USER"/>
-                <user name="admin" password="123" authorities="ROLE_USER, ROLE_ADMIN"/>
-            </user-service>
-        </authentication-provider>
-    </authentication-manager>
+    <!--
+        <authentication-manager>
+            <authentication-provider>
+                <user-service>
+                    <user name="user" password="123" authorities="ROLE_USER"/>
+                    <user name="admin" password="123" authorities="ROLE_USER, ROLE_ADMIN"/>
+                </user-service>
+            </authentication-provider>
+        </authentication-manager>
 
--->
-
-
-
-
-
-
-
+    -->
 
 
 </beans:beans>

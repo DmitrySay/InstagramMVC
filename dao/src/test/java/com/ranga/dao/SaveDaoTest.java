@@ -34,38 +34,36 @@ public class SaveDaoTest {
         user.setUsername("user");
         userDao.add(user);
 
-
-
-
         Role role = new Role();
         role.setId(1);
         role.setName("ROLE_USER");
         roleDao.add(role);
     }
 
+    @Test
+    public void findByUserName() {
 
+        String username = "user";
+
+        User user = (User) userDao.findByUsername(username);
+        System.out.println("******* " + user.toString());
+    }
 
 
     @Test
     public void save() {
 
         Set<Role> roles = new HashSet<>();
-        Role role =(Role) roleDao.get(Role.class,1);
-       // System.out.println("role = "+ role.toString());
+        Role role = (Role) roleDao.get(Role.class, 1);
 
-
-         System.out.println("======2");
-         roles.add(role);
+        roles.add(role);
 
         User user = new User();
         user.setUsername("name");
         user.setPassword("pass");
         user.setRoles(roles);
 
-        System.out.println("======3");
         userDao.add(user);
-        System.out.println("======4");
-
 
     }
 

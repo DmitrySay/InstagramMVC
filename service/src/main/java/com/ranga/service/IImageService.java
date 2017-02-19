@@ -11,4 +11,6 @@ public interface IImageService<T> extends IService<T> {
 
     List<T> list(Integer offset, Integer maxResults);
 
+    void deleteImage(int id);
+
 }
