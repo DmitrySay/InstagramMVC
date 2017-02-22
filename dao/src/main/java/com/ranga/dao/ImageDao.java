@@ -61,4 +61,11 @@ public class ImageDao extends BaseDao<Image> implements IImageDao<Image> {
         log.info("Delete image: " + id);
     }
 
+    @Override
+    public Image getImageById(int id) {
+        Session session = getSession();
+        Image image = (Image) session.get(Image.class, id);
+        return image;
+    }
+
 }

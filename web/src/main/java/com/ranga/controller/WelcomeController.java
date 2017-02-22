@@ -20,7 +20,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
-import java.io.Flushable;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
@@ -29,7 +28,7 @@ import java.util.List;
 @Controller
 public class WelcomeController {
 
-    private static final Logger logger = Logger.getLogger(WelcomeController.class);
+    private static final Logger log = Logger.getLogger(WelcomeController.class);
 
     @Autowired
     private IImageService imageService;
@@ -99,8 +98,8 @@ public class WelcomeController {
 
     public void printUserDetails() {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        logger.info("username " + userDetails.getUsername());
-        logger.info("password " + userDetails.getPassword());
+        log.info("username " + userDetails.getUsername());
+        log.info("password " + userDetails.getPassword());
     }
 
 
@@ -153,6 +152,7 @@ public class WelcomeController {
             File file = new File(path);
             FileUtils.writeByteArrayToFile(file, image.getBytes());
 
+
             Image imageT = new Image();
             imageT.setComment(comment);
             imageT.setFilename(filename);
@@ -171,13 +171,37 @@ public class WelcomeController {
 
 
     @RequestMapping({"/delete/{imageId}", "pages/delete/{imageId}"})
-    public String deleteImage(@PathVariable("imageId") Integer imageId) {
+    public String deleteImage(@PathVariable("imageId") Integer imageId, HttpServletRequest request) {
 
         if (imageId != null) {
-            imageService.deleteImage(imageId);
 
-            //TODO удалить сами фото , а не только ссылки на них из БД
+          //  Image image = (Image) imageService.get(Image.class, imageId); спросить почему нет сессии? от BaseDAo
+
+            Image image =imageService.getImageById(imageId); //затычка
+
+            String imageName= image.getFilename();
+            log.info("imageName = "+imageName);
+
+         try {
+             String rootPath = request.getSession().getServletContext().getRealPath("/");
+             FileUtils.touch(new File(rootPath + "WEB-INF\\images\\"+imageName));
+
+             log.info("rootPath "+rootPath);
+             log.info("rootPath + WEB-INF\\images+imageName"+rootPath + "WEB-INF\\images\\"+imageName);
+
+             File fileToDelete = FileUtils.getFile(rootPath + "WEB-INF\\images\\"+imageName);
+             boolean success = FileUtils.deleteQuietly(fileToDelete);
+
+             imageService.deleteImage(imageId);
+
+         }catch (IOException e ){
+             log.error("File deleting has failed." + e);
+         }
+
+
+
         }
+
         return "redirect:/";
 
     }

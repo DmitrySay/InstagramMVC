@@ -10,6 +10,7 @@ import java.io.Serializable;
 @Service
 public class BaseService<T> implements IService<T> {
 
+
     private Dao<T> baseDao;
 
     public BaseService() {

@@ -46,6 +46,11 @@ public class ImageService extends BaseService<Image> implements IImageService<Im
 
     }
 
+    @Override
+    public Image getImageById(int id) {
+        return imageDao.getImageById(id);
+    }
+
 
 }
 

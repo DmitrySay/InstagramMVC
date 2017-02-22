@@ -67,5 +67,14 @@ public class ImageServiceTest {
 
     }
 
+    @Test
+    public void getImageTest() {
+
+
+        Image image = (Image) imageService.get(Image.class, 1);
+        System.out.println(image.toString());
+
+    }
+
 
 }
