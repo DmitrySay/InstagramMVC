@@ -5,12 +5,14 @@ import com.ranga.dao.Dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.io.Serializable;
 
 @Service
+@Transactional
 public class BaseService<T> implements IService<T> {
 
-
+    @Autowired
     private Dao<T> baseDao;
 
     public BaseService() {

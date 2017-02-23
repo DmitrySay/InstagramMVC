@@ -71,7 +71,7 @@ public class ImageServiceTest {
     public void getImageTest() {
 
 
-        Image image = (Image) imageService.get(Image.class, 1);
+        Image image = (Image) imageService.get(Image.class, 11);
         System.out.println(image.toString());
 
     }

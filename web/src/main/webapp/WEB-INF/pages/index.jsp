@@ -48,7 +48,7 @@
                         <div class="form-group">
                             <h5 style="color: darkred">${message}</h5>
                             <br>
-                            <label for="comment"><spring:message code="form.write"/></label>
+                            <label for="comment" style="color: darkred"><spring:message code="form.write"/></label>
                             <textarea name="comment" id="comment" class="form-control" rows="10" cols="10"></textarea>
                         </div>
                         <div class="form-group">

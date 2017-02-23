@@ -26,6 +26,7 @@ public class BaseDao<T> implements Dao<T> {
 
     protected static Logger log = Logger.getLogger(BaseDao.class);
 
+    @Autowired
     private SessionFactory sessionFactory;
 
 
@@ -54,7 +55,7 @@ public class BaseDao<T> implements Dao<T> {
     @Override
     public T get(Class<T> clazz, Serializable id) {
         log.info("Get:" + clazz + " id = " + id);
-        return (T) getSession().load(clazz, id);
+        return (T) getSession().get(clazz, id);
     }
 
     @Override

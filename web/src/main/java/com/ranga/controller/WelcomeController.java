@@ -17,6 +17,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
@@ -131,12 +132,10 @@ public class WelcomeController {
 
     @RequestMapping(value = {"/fileUpLoad", "pages/fileUpLoad"}, method = RequestMethod.POST)
     public String singleImageSave(HttpServletRequest request, @RequestParam("comment") String comment,
-                                  @RequestParam("image") MultipartFile image, ModelMap model) throws IOException {
+                                  @RequestParam("image") MultipartFile image, RedirectAttributes redirectAttributes) throws IOException {
 
 
         String filename = "";
-        //  bindingResult.hasErrors();, BindingResult bindingResult
-
 
         if (validateImage(image) == true && comment != null && !comment.isEmpty()) {
 
@@ -163,8 +162,9 @@ public class WelcomeController {
 
 
         } else {
-            model.addAttribute("message", "Заполните комментарий и выберите фото");
-            return "index";
+
+            redirectAttributes.addFlashAttribute("message", "Заполните комментарий и выберите фото");
+            return "redirect:/index";
         }
 
     }
@@ -175,29 +175,27 @@ public class WelcomeController {
 
         if (imageId != null) {
 
-          //  Image image = (Image) imageService.get(Image.class, imageId); спросить почему нет сессии? от BaseDAo
+            Image image = (Image) imageService.get(Image.class, imageId);
 
-            Image image =imageService.getImageById(imageId); //затычка
+            String imageName = image.getFilename();
 
-            String imageName= image.getFilename();
-            log.info("imageName = "+imageName);
 
-         try {
-             String rootPath = request.getSession().getServletContext().getRealPath("/");
-             FileUtils.touch(new File(rootPath + "WEB-INF\\images\\"+imageName));
+            try {
+                String rootPath = request.getSession().getServletContext().getRealPath("/");
+                FileUtils.touch(new File(rootPath + "WEB-INF\\images\\" + imageName));
 
-             log.info("rootPath "+rootPath);
-             log.info("rootPath + WEB-INF\\images+imageName"+rootPath + "WEB-INF\\images\\"+imageName);
+                log.info("imageName = " + imageName);
+                log.info("rootPath " + rootPath);
+                log.info("rootPath + WEB-INF\\images+imageName" + rootPath + "WEB-INF\\images\\" + imageName);
 
-             File fileToDelete = FileUtils.getFile(rootPath + "WEB-INF\\images\\"+imageName);
-             boolean success = FileUtils.deleteQuietly(fileToDelete);
+                File fileToDelete = FileUtils.getFile(rootPath + "WEB-INF\\images\\" + imageName);
+                boolean success = FileUtils.deleteQuietly(fileToDelete);
 
-             imageService.deleteImage(imageId);
+                imageService.deleteImage(imageId);
 
-         }catch (IOException e ){
-             log.error("File deleting has failed." + e);
-         }
-
+            } catch (IOException e) {
+                log.error("File deleting has failed." + e);
+            }
 
 
         }

@@ -32,18 +32,19 @@
 
         <h2 class="form-signin-heading">Please register</h2>
         <label for="username">Username</label>
-        <form:errors path="username"></form:errors>
+        <form:errors path="username" style="color: darkred"/>
+
         <form:input type="text" path="username" class="form-control" placeholder="Username"
-                    autofocus="true"></form:input>
+                    autofocus="true" />
 
         <label for="username">Password</label>
-        <form:errors path="password"></form:errors>
-        <form:input type="password" path="password" class="form-control" placeholder="Password"></form:input>
+        <form:errors path="password" style="color: darkred"/>
+        <form:input type="password" path="password" class="form-control" placeholder="Password" />
 
         <label for="username">Confirm password</label>
-        <form:errors path="confirmPassword"></form:errors>
+        <form:errors path="confirmPassword" style="color: darkred"/>
         <form:input type="password" path="confirmPassword" class="form-control"
-                    placeholder="Confirm your password"></form:input>
+                    placeholder="Confirm your password" />
 
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
